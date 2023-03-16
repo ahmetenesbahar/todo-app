@@ -1,11 +1,16 @@
 import React from "react";
+import { FC } from "react";
+import "./App.scss";
+import Navbar from "./components/Navbar";
+import TodoInput from "./components/TodoInput";
 
-function App() {
+const App: FC = () => {
   return (
-    <div>
-      <div className="container">abc</div>
-    </div>
+    <>
+      <Navbar />
+      <TodoInput />
+    </>
   );
-}
+};
 
 export default App;
