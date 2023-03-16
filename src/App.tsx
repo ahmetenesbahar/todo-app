@@ -1,17 +1,16 @@
 import React from "react";
+import { FC } from "react";
 import "./App.scss";
 import Navbar from "./components/Navbar";
 import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
 
-function App() {
+const App: FC = () => {
   return (
     <>
       <Navbar />
       <TodoInput />
-      <TodoList />
     </>
   );
-}
+};
 
 export default App;
