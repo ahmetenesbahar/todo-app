@@ -1,27 +1,28 @@
 .input-card {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-width: 800px;
   .input-group {
     display: flex;
-    width: 100%;
     justify-content: center;
     padding: 5rem;
-    gap: 30px;
+
     input {
-      width: 30%;
-      border-radius: 10px;
+      min-width: 600px;
+      border-radius: 10px 0px 0px 10px;
       padding: 0.5rem 1rem;
+      border: none;
       outline: none;
+      font-size: 18px;
       &:focus {
         outline: none;
       }
     }
     button {
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
+      padding: 0.5rem 2rem;
       border: none;
+      outline: none;
+      border-radius: 0px 10px 10px 0px;
+      font-weight: 600;
+      background-color: #4d96ff;
       cursor: pointer;
     }
   }

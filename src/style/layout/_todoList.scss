@@ -1,0 +1,41 @@
+.todo-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .card-list {
+    min-width: 900px;
+    background-color: #fff;
+    border: 1px solid red;
+    .list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      font-size: 18px;
+      input {
+        width: 20px;
+        height: 20px;
+      }
+      .item-text {
+        min-width: 600px;
+      }
+      .item-btn {
+        button {
+          cursor: pointer;
+          border: none;
+          outline: none;
+          padding: 0.5rem 2rem;
+          font-weight: 600;
+        }
+        .edit {
+          border-radius: 10px 0px 0px 10px;
+          background-color: #ffdb89;
+        }
+        .delete {
+          border-radius: 0px 10px 10px 0px;
+          background-color: #b22727;
+        }
+      }
+    }
+  }
+}
