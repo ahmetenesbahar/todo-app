@@ -1,10 +1,16 @@
 import React from "react";
+import "./App.scss";
+import Navbar from "./components/Navbar";
+import TodoInput from "./components/TodoInput";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (
-    <div>
-      <div className="container">abc</div>
-    </div>
+    <>
+      <Navbar />
+      <TodoInput />
+      <TodoList />
+    </>
   );
 }
 

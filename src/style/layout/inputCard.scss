@@ -1,0 +1,28 @@
+.input-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .input-group {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 5rem;
+    gap: 30px;
+    input {
+      width: 30%;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      outline: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
