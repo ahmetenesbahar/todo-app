@@ -2,12 +2,20 @@ import React from "react";
 import { useState, FC } from "react";
 import TodoList from "./TodoList";
 
+interface IItem {
+  text: string;
+  id?: string;
+}
+
 const TodoInput: FC = () => {
   const [item, setItem] = useState<string>("");
   const [items, setItems] = useState<string[]>([]);
   const handleAdd = () => {
-    console.log(item);
+    if (item == "") {
+      return 0;
+    }
     setItems([item, ...items]);
+    setItem("");
   };
   return (
     <>
@@ -16,6 +24,7 @@ const TodoInput: FC = () => {
           <input
             type="text"
             placeholder="Write something to do"
+            value={item}
             onChange={(e) => setItem(e.target.value)}
           />
           <button className="add-btn" onClick={handleAdd}>
@@ -23,7 +32,7 @@ const TodoInput: FC = () => {
           </button>
         </div>
       </div>
-      <TodoList items={items} />
+      <TodoList items={items} setItems={setItems} />
     </>
   );
 };
