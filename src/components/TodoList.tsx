@@ -1,13 +1,14 @@
 import React from "react";
 import { FC } from "react";
+import { IItem } from "./Interfaces";
 type ChildProps = {
-  items: string[];
-  setItems: React.Dispatch<React.SetStateAction<string[]>>;
+  items: IItem[];
+  setItems: React.Dispatch<React.SetStateAction<IItem[]>>;
 };
 const TodoList: FC<ChildProps> = ({ items, setItems }) => {
-  const handleDelete = (e: any) => {
-    console.log(e);
-    setItems(items.filter(e));
+  const handleDelete = (id: number): void => {
+    console.log(id);
+    setItems(items.filter((item) => item.id !== id));
   };
   return (
     <>
@@ -16,10 +17,13 @@ const TodoList: FC<ChildProps> = ({ items, setItems }) => {
           <div className="card-list">
             <div className="list-item">
               <input type="checkbox" />
-              <p className="item-text">{item}</p>
+              <p className="item-text">{item.text}</p>
               <div className="item-btn">
                 <button className="edit">Edit</button>
-                <button className="delete" onClick={(e) => handleDelete(e)}>
+                <button
+                  className="delete"
+                  onClick={() => handleDelete(item.id)}
+                >
                   Delete
                 </button>
               </div>

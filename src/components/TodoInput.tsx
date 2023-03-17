@@ -1,21 +1,25 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { useState, FC } from "react";
 import TodoList from "./TodoList";
-
-interface IItem {
-  text: string;
-  id?: string;
-}
+import { IItem } from "./Interfaces";
 
 const TodoInput: FC = () => {
   const [item, setItem] = useState<string>("");
-  const [items, setItems] = useState<string[]>([]);
+  const [id, setId] = useState<number>(0);
+  const [items, setItems] = useState<IItem[]>([]);
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setItem(event.target.value);
+  };
   const handleAdd = () => {
     if (item == "") {
       return 0;
     }
-    setItems([item, ...items]);
+    let generateId: number = Math.floor(Math.random() * 10000000000);
+    setId(generateId);
+    const newItem = { text: item, id: id };
+    setItems([newItem, ...items]);
     setItem("");
+    // *! setId(0) yaptığımda (id yi en son 0 a eşitlesin sonra tekrardan add e bastığımda yeni değer versin diye bunu yapıyorum) tüm taskları siliyor setId(0) yokken kod istediğim gibi çalışıyor ?
   };
   return (
     <>
@@ -25,7 +29,7 @@ const TodoInput: FC = () => {
             type="text"
             placeholder="Write something to do"
             value={item}
-            onChange={(e) => setItem(e.target.value)}
+            onChange={handleChange}
           />
           <button className="add-btn" onClick={handleAdd}>
             Add
