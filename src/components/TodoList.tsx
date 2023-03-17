@@ -4,12 +4,14 @@ import { IItem } from "./Interfaces";
 type ChildProps = {
   items: IItem[];
   setItems: React.Dispatch<React.SetStateAction<IItem[]>>;
+  handleEdit: (id: number) => void;
 };
-const TodoList: FC<ChildProps> = ({ items, setItems }) => {
+const TodoList: FC<ChildProps> = ({ items, setItems, handleEdit }) => {
   const handleDelete = (id: number): void => {
     console.log(id);
     setItems(items.filter((item) => item.id !== id));
   };
+
   return (
     <>
       {items.map((item) => (
@@ -19,7 +21,9 @@ const TodoList: FC<ChildProps> = ({ items, setItems }) => {
               <input type="checkbox" />
               <p className="item-text">{item.text}</p>
               <div className="item-btn">
-                <button className="edit">Edit</button>
+                <button className="edit" onClick={() => handleEdit(item.id)}>
+                  Edit
+                </button>
                 <button
                   className="delete"
                   onClick={() => handleDelete(item.id)}
@@ -37,5 +41,3 @@ const TodoList: FC<ChildProps> = ({ items, setItems }) => {
 
 export default TodoList;
 // *? süslü koyarsam return yazmak zorundayım normal koyarsam oluo
-
-//TODO

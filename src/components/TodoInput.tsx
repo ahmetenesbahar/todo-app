@@ -21,6 +21,10 @@ const TodoInput: FC = () => {
     setItem("");
     // *! setId(0) yaptığımda (id yi en son 0 a eşitlesin sonra tekrardan add e bastığımda yeni değer versin diye bunu yapıyorum) tüm taskları siliyor setId(0) yokken kod istediğim gibi çalışıyor ?
   };
+
+  const handleEdit = (id: number): void => {
+    items.map((item) => (item.id === id ? setItem(item.text) : setItem("")));
+  };
   return (
     <>
       <div className="input-card">
@@ -36,7 +40,7 @@ const TodoInput: FC = () => {
           </button>
         </div>
       </div>
-      <TodoList items={items} setItems={setItems} />
+      <TodoList items={items} setItems={setItems} handleEdit={handleEdit} />
     </>
   );
 };
