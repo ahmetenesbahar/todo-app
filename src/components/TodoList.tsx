@@ -8,7 +8,6 @@ type ChildProps = {
 };
 const TodoList: FC<ChildProps> = ({ items, setItems, handleEdit }) => {
   const handleDelete = (id: number): void => {
-    console.log(id);
     setItems(items.filter((item) => item.id !== id));
   };
 
