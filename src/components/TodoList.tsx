@@ -1,42 +1,25 @@
 import React from "react";
-import { FC } from "react";
-import { IItem } from "./Interfaces";
+import { useState, FC } from "react";
+import TodoItem from "./TodoItem";
 type ChildProps = {
-  items: IItem[];
-  setItems: React.Dispatch<React.SetStateAction<IItem[]>>;
-  handleEdit: (id: number) => void;
+  task: {
+    id: number;
+    text: string;
+  }[];
+  handleDelete: (id: number) => void;
 };
-const TodoList: FC<ChildProps> = ({ items, setItems, handleEdit }) => {
-  const handleDelete = (id: number): void => {
-    setItems(items.filter((item) => item.id !== id));
-  };
+const TodoList: FC<ChildProps> = ({ task, handleDelete }) => {
+  if (!task || task.length === 0) {
+    return <p>No Task :D</p>;
+  }
 
   return (
-    <>
-      {items.map((item) => (
-        <div className="todo-list">
-          <div className="card-list">
-            <div className="list-item">
-              <input type="checkbox" />
-              <p className="item-text">{item.text}</p>
-              <div className="item-btn">
-                <button className="edit" onClick={() => handleEdit(item.id)}>
-                  Edit
-                </button>
-                <button
-                  className="delete"
-                  onClick={() => handleDelete(item.id)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="task-list">
+      {task.map((task) => (
+        <TodoItem key={task.id} task={task} handleDelete={handleDelete} />
       ))}
-    </>
+    </div>
   );
 };
 
 export default TodoList;
-// *? süslü koyarsam return yazmak zorundayım normal koyarsam oluo

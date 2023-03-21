@@ -1,14 +1,19 @@
 import React from "react";
-import { FC } from "react";
 import "./App.scss";
-import Navbar from "./components/Navbar";
-import TodoInput from "./components/TodoInput";
+import { useState, FC } from "react";
+import TodoList from "./components/TodoList";
+import TodoData from "./components/data/DummyData";
 
 const App: FC = () => {
+  const [task, setTask] = useState([...TodoData]);
+  const deleteTask = (id: number) => {
+    if (window.confirm("Are you sure you want to delete ?")) {
+      setTask(task.filter((task) => task.id !== id));
+    }
+  };
   return (
     <>
-      <Navbar />
-      <TodoInput />
+      <TodoList task={task} handleDelete={deleteTask} />
     </>
   );
 };
