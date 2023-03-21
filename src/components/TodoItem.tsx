@@ -11,9 +11,6 @@ type ChildProps = {
 };
 
 const TodoItem: FC<ChildProps> = ({ task, handleDelete }) => {
-  const [text, setText] = useState("");
-  const [id, setId] = useState(5);
-
   return (
     <div className="task-card">
       <input type="checkbox" className="checkbox" />
