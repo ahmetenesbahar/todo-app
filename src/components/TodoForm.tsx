@@ -1,26 +1,40 @@
 import React from "react";
-import { useState, FC, ChangeEvent, FormEvent } from "react";
+import {
+  FC,
+  useContext,
+  ChangeEvent,
+  useEffect,
+  useState,
+  FormEvent,
+} from "react";
 import { FaPlus } from "react-icons/fa";
-type ChildProps = {
-  handleAdd: (newTask: { text: string; id: number }) => void;
-};
-const TodoForm: FC<ChildProps> = ({ handleAdd }) => {
-  const [text, setText] = useState("");
-  const [id, setId] = useState(5);
+import TodoContext from "./context/TodoContext";
+
+const TodoForm: FC = () => {
+  const { addTask, edit } = useContext(TodoContext);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
+  const [text, setText] = useState("");
+  const [id, setId] = useState();
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newTask = {
-      text,
-      id: id,
-    };
-    let generateId = Math.floor(Math.random() * 10000000000000);
-    setId(generateId);
-    handleAdd(newTask);
     setText("");
+    const generateId = Math.floor(Math.random() * 10000000000000);
+    // setId(generateId);
+    addTask({ text, id: generateId });
   };
+
+  useEffect(() => {
+    if (edit.edit) {
+      setText(edit.task.text);
+      setId(edit.task.id);
+    } else {
+      console.log("add");
+    }
+  }, [edit]);
+
   return (
     <form className="task-form" onSubmit={handleSubmit}>
       <input

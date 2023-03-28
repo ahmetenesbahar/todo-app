@@ -1,24 +1,24 @@
 import React from "react";
-import { useState, FC } from "react";
+import { useState, FC, useContext } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
+import TodoContext from "./context/TodoContext";
 
 type ChildProps = {
-  task: {
+  item: {
     id: number;
     text: string;
   };
-  handleDelete: (id: number) => void;
-  handleEdit: (task: any) => void;
 };
 
-const TodoItem: FC<ChildProps> = ({ task, handleDelete, handleEdit }) => {
+const TodoItem: FC<ChildProps> = ({ item }) => {
+  const { deleteTask, editTask } = useContext(TodoContext);
   return (
     <div className="task-card">
       <input type="checkbox" className="checkbox" />
-      <p className="task-text">{task.text}</p>
+      <p className="task-text">{item.text}</p>
       <div className="card-btn">
-        <FaTrash className="delete" onClick={() => handleDelete(task.id)} />
-        <FaEdit className="edit" onClick={() => handleEdit(task)} />
+        <FaTrash className="delete" onClick={() => deleteTask(item.id)} />
+        <FaEdit className="edit" onClick={() => editTask(item)} />
       </div>
     </div>
   );
