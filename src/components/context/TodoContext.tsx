@@ -21,7 +21,10 @@ interface IType {
   deleteTask: (id: number) => void;
   editTask: (task: { id: number; text: string }) => void;
   edit: {
-    task: {};
+    task: {
+      text: string;
+      id: number;
+    };
     edit: boolean;
   };
 }
@@ -31,7 +34,10 @@ const TodoContext = createContext<IType>({
   deleteTask: () => {},
   editTask: () => {},
   edit: {
-    task: {},
+    task: {
+      text: "",
+      id: 0,
+    },
     edit: false,
   },
 });
@@ -39,7 +45,10 @@ const TodoContext = createContext<IType>({
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   const [task, setTask] = useState<TaskProps[]>([]);
   const [edit, setEdit] = useState({
-    task: {},
+    task: {
+      text: "",
+      id: 0,
+    },
     edit: false,
   });
 

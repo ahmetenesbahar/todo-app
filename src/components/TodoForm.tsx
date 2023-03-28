@@ -15,8 +15,8 @@ const TodoForm: FC = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
-  const [text, setText] = useState("");
-  const [id, setId] = useState();
+  const [text, setText] = useState<string>("");
+  const [id, setId] = useState<number>();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +28,8 @@ const TodoForm: FC = () => {
 
   useEffect(() => {
     if (edit.edit) {
+      setText(edit.task.text);
+      setId(edit.task.id);
       console.log("edit");
     } else {
       console.log("add");
