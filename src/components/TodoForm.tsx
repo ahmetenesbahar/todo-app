@@ -28,8 +28,7 @@ const TodoForm: FC = () => {
 
   useEffect(() => {
     if (edit.edit) {
-      setText(edit.task.text);
-      setId(edit.task.id);
+      console.log("edit");
     } else {
       console.log("add");
     }
