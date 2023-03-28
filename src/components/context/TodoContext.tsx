@@ -27,6 +27,7 @@ interface IType {
     };
     edit: boolean;
   };
+  updateTask: (newTask: { text: string; id: number }) => void;
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -40,6 +41,7 @@ const TodoContext = createContext<IType>({
     },
     edit: false,
   },
+  updateTask: () => {},
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -70,11 +72,20 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
       edit: true,
     });
   };
+  // Update Task
+  const updateTask = (newTask: { text: string; id: number }) => {
+    setTask(
+      task.map((item) =>
+        item.id === newTask.id ? { ...item, text: newTask.text } : item
+      )
+    );
+  };
 
   return (
     <TodoContext.Provider
       value={{
         task,
+        updateTask,
         addTask,
         deleteTask,
         editTask,

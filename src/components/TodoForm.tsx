@@ -11,7 +11,7 @@ import { FaPlus } from "react-icons/fa";
 import TodoContext from "./context/TodoContext";
 
 const TodoForm: FC = () => {
-  const { addTask, edit } = useContext(TodoContext);
+  const { addTask, edit, updateTask } = useContext(TodoContext);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
@@ -20,19 +20,22 @@ const TodoForm: FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (edit.edit) {
+      updateTask({ text, id: edit.task.id });
+      edit.edit = false;
+    } else {
+      const generateId = Math.floor(Math.random() * 10000000000000);
+      addTask({ text, id: generateId });
+    }
     setText("");
-    const generateId = Math.floor(Math.random() * 10000000000000);
+
     // setId(generateId);
-    addTask({ text, id: generateId });
   };
 
   useEffect(() => {
     if (edit.edit) {
       setText(edit.task.text);
       setId(edit.task.id);
-      console.log("edit");
-    } else {
-      console.log("add");
     }
   }, [edit]);
 
