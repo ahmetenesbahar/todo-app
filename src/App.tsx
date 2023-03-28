@@ -1,15 +1,17 @@
 import React from "react";
-import { FC } from "react";
 import "./App.scss";
-import Navbar from "./components/Navbar";
-import TodoInput from "./components/TodoInput";
+import { useState, FC, useEffect } from "react";
+import TodoList from "./components/TodoList";
+import TodoForm from "./components/TodoForm";
+import TodoData from "./components/data/DummyData";
+import { TodoProvider } from "./components/context/TodoContext";
 
 const App: FC = () => {
   return (
-    <>
-      <Navbar />
-      <TodoInput />
-    </>
+    <TodoProvider>
+      <TodoForm />
+      <TodoList />
+    </TodoProvider>
   );
 };
 

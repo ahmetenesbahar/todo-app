@@ -1,0 +1,27 @@
+.task-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  gap: 30px;
+  .form {
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid gray;
+    padding: 0.5rem 1rem;
+    min-width: 800px;
+    max-width: 800px;
+    font-size: 1.1rem;
+  }
+  button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    .add {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    cursor: pointer;
+  }
+}

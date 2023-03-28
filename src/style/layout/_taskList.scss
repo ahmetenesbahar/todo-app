@@ -1,0 +1,52 @@
+.task-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .task-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+    min-width: 900px;
+    max-width: 900px;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid gray;
+    .checkbox {
+      width: 1.3em;
+      height: 1.3em;
+      background-color: white;
+      border-radius: 50%;
+      vertical-align: middle;
+      border: 1px solid gray;
+      appearance: none;
+      -webkit-appearance: none;
+      outline: none;
+      cursor: pointer;
+      &:checked {
+        appearance: auto;
+        clip-path: circle(50% at 50% 50%);
+      }
+    }
+    .task-text {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0.5rem;
+      min-width: 700px;
+      max-width: 700px;
+      word-wrap: break-word;
+    }
+    .card-btn {
+      .delete {
+        margin: 5px;
+        cursor: pointer;
+      }
+      .edit {
+        margin: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}

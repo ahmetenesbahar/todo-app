@@ -1,30 +1,21 @@
 import React from "react";
-import { FC } from "react";
-type ChildProps = {
-  items: string[];
-};
-const TodoList: FC<ChildProps> = ({ items }) => {
+import { useState, FC, useContext } from "react";
+import TodoContext from "./context/TodoContext";
+import TodoItem from "./TodoItem";
+
+const TodoList: FC = () => {
+  const { task } = useContext(TodoContext);
+  if (!task || task.length === 0) {
+    return <p>No Task :D</p>;
+  }
+
   return (
-    <>
-      {items.map((item) => (
-        <div className="todo-list">
-          <div className="card-list">
-            <div className="list-item">
-              <input type="checkbox" />
-              <p className="item-text">{item}</p>
-              <div className="item-btn">
-                <button className="edit">Edit</button>
-                <button className="delete">Delete</button>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="task-list">
+      {task.map((item) => (
+        <TodoItem key={item.id} item={item} />
       ))}
-    </>
+    </div>
   );
 };
 
 export default TodoList;
-// *? süslü koyarsam return yazmak zorundayım normal koyarsam oluo
-
-//TODO
