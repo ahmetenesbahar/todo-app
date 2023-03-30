@@ -7,17 +7,37 @@
   background-color: #b2a4ff;
   .icon {
     font-size: 1.3rem;
+    cursor: pointer;
   }
   .left {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
+    .search-form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      .search {
+        outline: none;
+        border-radius: 10px;
+        border: none;
+        min-width: 300px;
+        padding: 0.4rem;
+        padding-left: 2rem;
+      }
+      .search-icon {
+        position: absolute;
+        left: 5px;
+      }
+    }
   }
   .right {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
   }
 }

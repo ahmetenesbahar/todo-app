@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBars, FaHome, FaPlus, FaBell } from "react-icons/fa";
+import { FaBars, FaHome, FaPlus, FaBell, FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
   return (
@@ -9,6 +9,7 @@ const Navbar = () => {
         <FaHome className="home icon" />
         <form className="search-form">
           <input type="text" className="search" />
+          <FaSearch className="search-icon icon" />
         </form>
       </div>
       <div className="right">
