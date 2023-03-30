@@ -41,16 +41,16 @@ const TodoForm: FC = () => {
 
   return (
     <form className="task-form" onSubmit={handleSubmit}>
+      <button>
+        <FaPlus className="add" />
+      </button>
       <input
         type="text"
-        placeholder="Enter task !"
+        placeholder="Add task !"
         value={text}
         className="form"
         onChange={handleChange}
       />
-      <button>
-        <FaPlus className="add" />
-      </button>
     </form>
   );
 };
