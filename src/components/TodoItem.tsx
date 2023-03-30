@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, FC, useContext } from "react";
+import { FC, useContext } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import TodoContext from "./context/TodoContext";
 
