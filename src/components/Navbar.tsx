@@ -15,6 +15,7 @@ const Navbar = () => {
       <div className="right">
         <FaPlus className="add-task icon" />
         <FaBell className="icon notifications" />
+        <div className="user-icon"></div>
       </div>
     </div>
   );
