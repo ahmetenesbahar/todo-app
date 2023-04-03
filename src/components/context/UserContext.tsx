@@ -14,7 +14,7 @@ interface IType {
     }>
   >;
   localUserCheck: () => void;
-  localUser: (user: { username: string; password: string }) => void;
+  localUser: (user: { username: string }) => void;
 }
 const UserContext = createContext<IType>({
   isLoggedIn: false,
@@ -35,7 +35,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     password: "",
   });
   const loginScreen = document.querySelector(".login-screen");
-  const localUser = (user: { username: string; password: string }) => {
+  const localUser = (user: { username: string }) => {
     localStorage.setItem("user", JSON.stringify(user));
   };
 
