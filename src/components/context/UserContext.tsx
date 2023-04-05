@@ -34,6 +34,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     username: "",
     password: "",
   });
+
   const loginScreen = document.querySelector(".login-screen");
   const localUser = (user: { username: string }) => {
     localStorage.setItem("user", JSON.stringify(user));
@@ -65,3 +66,4 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 export default UserContext;
+export const useUserContext = () => useContext(UserContext);
