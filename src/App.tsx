@@ -7,20 +7,21 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import { TodoProvider } from "./components/context/TodoContext";
 import { UserProvider } from "./components/context/UserContext";
-import { ThemeProvider } from "./components/context/ThemeContext";
+import { useTheme } from "./components/context/ThemeContext";
 
 const App: FC = () => {
+  const { theme } = useTheme();
   return (
-    <ThemeProvider>
-      <TodoProvider>
-        <UserProvider>
+    <TodoProvider>
+      <UserProvider>
+        <main className={`app ${theme}`}>
           <Login />
           <Navbar />
           <TodoForm />
           <TodoList />
-        </UserProvider>
-      </TodoProvider>
-    </ThemeProvider>
+        </main>
+      </UserProvider>
+    </TodoProvider>
   );
 };
 
