@@ -15,6 +15,8 @@ interface IType {
   >;
   localUserCheck: () => void;
   localUser: (user: { username: string }) => void;
+  hide: "" | "hide";
+  setHide: React.Dispatch<React.SetStateAction<"" | "hide">>;
 }
 const UserContext = createContext<IType>({
   isLoggedIn: false,
@@ -26,6 +28,8 @@ const UserContext = createContext<IType>({
   setUser: () => {},
   localUser: () => {},
   localUserCheck: () => {},
+  hide: "",
+  setHide: () => {},
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -34,7 +38,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     username: "",
     password: "",
   });
-  const loginScreen = document.querySelector(".login-screen");
+
+  const [hide, setHide] = useState<"hide" | "">("");
   const localUser = (user: { username: string }) => {
     localStorage.setItem("user", JSON.stringify(user));
   };
@@ -45,11 +50,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       const user = JSON.parse(getlocalUser);
       setUser(user);
       setIsLoggedIn(true);
-      loginScreen?.classList.add("hide");
+      setHide("hide");
     }
     if (!getlocalUser) {
       setIsLoggedIn(false);
-      loginScreen?.classList.remove("hide");
+      setHide("");
     }
   };
 
@@ -60,8 +65,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     setUser,
     localUser,
     localUserCheck,
+    hide,
+    setHide,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 export default UserContext;
+export const useUserContext = () => useContext(UserContext);

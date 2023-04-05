@@ -4,10 +4,10 @@
   align-items: center;
   width: 100%;
   padding: 1rem 2rem;
-  background-color: #19a7ce;
-  // background-color: #19376d; dark mode
+  background-color: $primary-color;
 
   .icon {
+    color: $dark-blue;
     font-size: 1.3rem;
     cursor: pointer;
   }
@@ -33,6 +33,7 @@
       .search-icon {
         position: absolute;
         left: 5px;
+        color: $dark-blue;
       }
     }
   }
@@ -44,10 +45,26 @@
     .user-icon {
       font-size: 1.5rem;
       cursor: pointer;
-      background-color: #fff;
+      background-color: $white;
       width: 30px;
       height: 30px;
       border-radius: 50%;
+    }
+  }
+}
+
+.navbar.dark {
+  background-color: $dark;
+
+  .icon {
+    color: $white;
+  }
+
+  .left {
+    .search-form {
+      .search {
+        background-color: $light-gray;
+      }
     }
   }
 }

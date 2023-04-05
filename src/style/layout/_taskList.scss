@@ -10,16 +10,15 @@
     margin: 1rem;
     min-width: 900px;
     max-width: 900px;
-    border-radius: 10px;
     padding: 0.5rem 1rem;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid $gray;
     .checkbox {
       width: 1.3em;
       height: 1.3em;
-      background-color: white;
+      background-color: $white;
       border-radius: 50%;
       vertical-align: middle;
-      border: 1px solid gray;
+      border: 1px solid $gray;
       appearance: none;
       -webkit-appearance: none;
       outline: none;
@@ -40,13 +39,19 @@
     }
     .card-btn {
       .delete {
-        margin: 5px;
+        margin: 6px;
         cursor: pointer;
       }
       .edit {
-        margin: 5px;
+        margin: 6px;
         cursor: pointer;
       }
     }
+  }
+}
+
+.task-list.dark {
+  .task-card {
+    background-color: $dark;
   }
 }

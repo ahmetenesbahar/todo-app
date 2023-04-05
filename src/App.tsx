@@ -7,15 +7,19 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import { TodoProvider } from "./components/context/TodoContext";
 import { UserProvider } from "./components/context/UserContext";
+import { useTheme } from "./components/context/ThemeContext";
 
 const App: FC = () => {
+  const { theme } = useTheme();
   return (
     <TodoProvider>
       <UserProvider>
-        <Login />
-        <Navbar />
-        <TodoForm />
-        <TodoList />
+        <main className={`app ${theme}`}>
+          <Login />
+          <Navbar />
+          <TodoForm />
+          <TodoList />
+        </main>
       </UserProvider>
     </TodoProvider>
   );
