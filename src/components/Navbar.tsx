@@ -27,8 +27,12 @@ const Navbar = () => {
       <div className="right">
         {/* <FaPlus className="add-task icon" /> */}
         {/* <FaBell className="icon notifications" /> */}
-        <FaSun className="sun-icon icon active " onClick={toggleTheme} />
-        <FaMoon className="moon-icon icon " onClick={toggleTheme} />
+        {theme === "light" ? (
+          <FaMoon className="moon-icon icon " onClick={toggleTheme} />
+        ) : (
+          <FaSun className="sun-icon icon " onClick={toggleTheme} />
+        )}
+
         <div className="user-icon"></div>
       </div>
     </div>

@@ -7,7 +7,7 @@
   background-color: $primary-color;
 
   .icon {
-    color: $dark-blue;
+    color: $dark;
     font-size: 1.3rem;
     cursor: pointer;
   }
@@ -64,9 +64,6 @@
     .search-form {
       .search {
         background-color: $light-gray;
-        .search-icon {
-          color: $yellow;
-        }
       }
     }
   }
