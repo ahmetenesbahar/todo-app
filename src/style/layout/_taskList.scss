@@ -53,5 +53,9 @@
 .task-list.dark {
   .task-card {
     background-color: $dark;
+
+    .card-btn {
+      color: $white2;
+    }
   }
 }
