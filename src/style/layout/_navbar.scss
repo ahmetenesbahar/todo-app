@@ -57,13 +57,16 @@
   background-color: $dark;
 
   .icon {
-    color: $white;
+    color: $yellow;
   }
 
   .left {
     .search-form {
       .search {
         background-color: $light-gray;
+        .search-icon {
+          color: $yellow;
+        }
       }
     }
   }
