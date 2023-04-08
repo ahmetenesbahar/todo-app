@@ -48,7 +48,9 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Add Task
   const addTask = (newTask: { text: string; id: number }) => {
-    setTask([newTask, ...task]);
+    if (newTask.text !== "") {
+      setTask([newTask, ...task]);
+    }
   };
   //Delete Task
   const deleteTask = (id: number) => {
