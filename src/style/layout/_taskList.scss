@@ -58,8 +58,12 @@
       color: $white2;
     }
   }
+  .task-card.selected {
+    background-color: #19376d !important;
+  }
 }
 
 .task-card.selected {
-  box-shadow: 0 0 0 2px blue;
+  background-color: $primary-color !important;
+  color: $white2;
 }

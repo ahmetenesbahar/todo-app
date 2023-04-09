@@ -20,6 +20,8 @@ interface IType {
     edit: boolean;
   };
   updateTask: (newTask: { text: string; id: number }) => void;
+  setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
+  selectedId: number | null;
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -34,6 +36,8 @@ const TodoContext = createContext<IType>({
     edit: false,
   },
   updateTask: () => {},
+  setSelectedId: () => {},
+  selectedId: null,
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -45,6 +49,8 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     },
     edit: false,
   });
+
+  const [selectedId, setSelectedId] = useState<number | null>(0);
 
   // Add Task
   const addTask = (newTask: { text: string; id: number }) => {
@@ -82,6 +88,9 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         deleteTask,
         editTask,
         edit,
+
+        setSelectedId,
+        selectedId,
       }}
     >
       {children}
