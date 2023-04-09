@@ -21,7 +21,7 @@ const TodoForm: FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (edit.edit) {
-      updateTask({ text, id: edit.task.id });
+      updateTask({ text, id: edit.item.id });
       edit.edit = false;
     } else {
       const generateId = Math.floor(Math.random() * 10000000000000);
@@ -34,8 +34,8 @@ const TodoForm: FC = () => {
 
   useEffect(() => {
     if (edit.edit) {
-      setText(edit.task.text);
-      setId(edit.task.id);
+      setText(edit.item.text);
+      setId(edit.item.id);
     }
   }, [edit]);
 

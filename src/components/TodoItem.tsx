@@ -11,9 +11,9 @@ type ChildProps = {
 };
 
 const TodoItem: FC<ChildProps> = ({ item }) => {
-  const { deleteTask, editTask } = useContext(TodoContext);
+  const { deleteTask, editTask, selected } = useContext(TodoContext);
   return (
-    <div className="task-card">
+    <div className={`task-card ${selected}`}>
       <input type="checkbox" className="checkbox" />
       <p className="task-text">{item.text}</p>
       <div className="card-btn">

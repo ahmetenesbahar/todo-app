@@ -13,13 +13,14 @@ interface IType {
   deleteTask: (id: number) => void;
   editTask: (task: { id: number; text: string }) => void;
   edit: {
-    task: {
+    item: {
       text: string;
       id: number;
     };
     edit: boolean;
   };
   updateTask: (newTask: { text: string; id: number }) => void;
+  selected: "" | "selected";
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -27,24 +28,26 @@ const TodoContext = createContext<IType>({
   deleteTask: () => {},
   editTask: () => {},
   edit: {
-    task: {
+    item: {
       text: "",
       id: 0,
     },
     edit: false,
   },
   updateTask: () => {},
+  selected: "",
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   const [task, setTask] = useState<TaskProps[]>([]);
   const [edit, setEdit] = useState({
-    task: {
+    item: {
       text: "",
       id: 0,
     },
     edit: false,
   });
+  const [selected, setSelected] = useState<"selected" | "">("");
 
   // Add Task
   const addTask = (newTask: { text: string; id: number }) => {
@@ -60,10 +63,15 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   };
   //Edit Task
 
-  const editTask = (task: { id: number; text: string }) => {
+  const editTask = (item: { id: number; text: string }) => {
     setEdit({
-      task,
+      item,
       edit: true,
+    });
+    task.map((task) => {
+      if (task.id === item.id) {
+        setSelected("selected");
+      }
     });
   };
   // Update Task
@@ -84,6 +92,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         deleteTask,
         editTask,
         edit,
+        selected,
       }}
     >
       {children}
