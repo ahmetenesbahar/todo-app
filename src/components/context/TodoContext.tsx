@@ -50,7 +50,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     edit: false,
   });
 
-  const [selectedId, setSelectedId] = useState<number | null>(0);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   // Add Task
   const addTask = (newTask: { text: string; id: number }) => {
@@ -77,6 +77,9 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         item.id === newTask.id ? { ...item, text: newTask.text } : item
       )
     );
+    document
+      .querySelectorAll(".task-card")
+      .forEach((item) => item.classList.remove("selected"));
   };
 
   return (
