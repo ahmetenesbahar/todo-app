@@ -20,7 +20,6 @@ interface IType {
     edit: boolean;
   };
   updateTask: (newTask: { text: string; id: number }) => void;
-  selected: "" | "selected";
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -35,7 +34,6 @@ const TodoContext = createContext<IType>({
     edit: false,
   },
   updateTask: () => {},
-  selected: "",
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -47,7 +45,6 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     },
     edit: false,
   });
-  const [selected, setSelected] = useState<"selected" | "">("");
 
   // Add Task
   const addTask = (newTask: { text: string; id: number }) => {
@@ -57,9 +54,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   };
   //Delete Task
   const deleteTask = (id: number) => {
-    if (window.confirm("Are you sure you want to delete ?")) {
-      setTask(task.filter((item) => item.id !== id));
-    }
+    setTask(task.filter((item) => item.id !== id));
   };
   //Edit Task
 
@@ -67,11 +62,6 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     setEdit({
       item,
       edit: true,
-    });
-    task.map((task) => {
-      if (task.id === item.id) {
-        setSelected("selected");
-      }
     });
   };
   // Update Task
@@ -92,7 +82,6 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         deleteTask,
         editTask,
         edit,
-        selected,
       }}
     >
       {children}
