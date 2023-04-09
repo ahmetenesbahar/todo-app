@@ -11,14 +11,21 @@ type ChildProps = {
 };
 
 const TodoItem: FC<ChildProps> = ({ item }) => {
-  const { deleteTask, editTask } = useContext(TodoContext);
+  const { deleteTask, editTask, setSelectedId, selectedId } =
+    useContext(TodoContext);
   return (
-    <div className="task-card">
+    <div className={selectedId == item.id ? "task-card selected" : "task-card"}>
       <input type="checkbox" className="checkbox" />
       <p className="task-text">{item.text}</p>
       <div className="card-btn">
         <FaTrash className="delete" onClick={() => deleteTask(item.id)} />
-        <FaEdit className="edit" onClick={() => editTask(item)} />
+        <FaEdit
+          className="edit"
+          onClick={() => {
+            editTask(item);
+            setSelectedId(item.id);
+          }}
+        />
       </div>
     </div>
   );
