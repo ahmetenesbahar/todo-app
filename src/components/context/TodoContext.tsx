@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 type TaskProps = {
   id: number;
@@ -22,6 +22,7 @@ interface IType {
   updateTask: (newTask: { text: string; id: number }) => void;
   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
   selectedId: number | null;
+  setLocalTask: () => void;
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -38,10 +39,13 @@ const TodoContext = createContext<IType>({
   updateTask: () => {},
   setSelectedId: () => {},
   selectedId: null,
+  setLocalTask: () => {},
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
-  const [task, setTask] = useState<TaskProps[]>([]);
+  const [task, setTask] = useState<TaskProps[]>(
+    JSON.parse(localStorage.getItem("task")!) ?? []
+  );
   const [edit, setEdit] = useState({
     item: {
       text: "",
@@ -52,12 +56,22 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
+  // Get Task from Local Storage
+  const setLocalTask = () => {
+    localStorage.setItem("task", JSON.stringify(task));
+  };
+
   // Add Task
   const addTask = (newTask: { text: string; id: number }) => {
     if (newTask.text !== "") {
       setTask([newTask, ...task]);
     }
   };
+
+  useEffect(() => {
+    setLocalTask();
+  }, [task]);
+  //? UseEffect olarak yazınca sorun olmadı diğer türlü add in içine yazdığımda eklediğim ilk taskı almıyor
   //Delete Task
   const deleteTask = (id: number) => {
     setTask(task.filter((item) => item.id !== id));
@@ -85,15 +99,15 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <TodoContext.Provider
       value={{
+        addTask,
         task,
         updateTask,
-        addTask,
         deleteTask,
         editTask,
         edit,
-
         setSelectedId,
         selectedId,
+        setLocalTask,
       }}
     >
       {children}

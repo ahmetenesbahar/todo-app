@@ -38,8 +38,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     username: "",
     password: "",
   });
-
   const [hide, setHide] = useState<"hide" | "">("");
+
   const localUser = (user: { username: string }) => {
     localStorage.setItem("user", JSON.stringify(user));
   };

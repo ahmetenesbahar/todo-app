@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FC, useContext } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import TodoContext from "./context/TodoContext";
@@ -13,6 +13,7 @@ type ChildProps = {
 const TodoItem: FC<ChildProps> = ({ item }) => {
   const { deleteTask, editTask, setSelectedId, selectedId } =
     useContext(TodoContext);
+
   return (
     <div className={selectedId == item.id ? "task-card selected" : "task-card"}>
       <input type="checkbox" className="checkbox" />
