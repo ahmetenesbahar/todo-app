@@ -13,6 +13,12 @@ import ThemeContext from "./context/ThemeContext";
 
 const Navbar = () => {
   const { toggleTheme, theme } = useContext(ThemeContext);
+  const [search, setSearch] = useState("");
+
+  const searchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    console.log(search);
+  };
 
   return (
     <div className={`navbar ${theme}`}>
@@ -20,7 +26,12 @@ const Navbar = () => {
         {/* <FaBars className="menu icon" />
         <FaHome className="home icon" /> */}
         <form className="search-form">
-          <input type="text" className="search" />
+          <input
+            type="text"
+            className="search"
+            value={search}
+            onChange={searchOnChange}
+          />
           <FaSearch className="search-icon icon" />
         </form>
       </div>
