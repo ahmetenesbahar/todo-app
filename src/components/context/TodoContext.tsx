@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 type TaskProps = {
   id: number;
@@ -22,6 +22,8 @@ interface IType {
   updateTask: (newTask: { text: string; id: number }) => void;
   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
   selectedId: number | null;
+  filteredTask: TaskProps[];
+  searchTask: (text: string) => void;
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -38,6 +40,8 @@ const TodoContext = createContext<IType>({
   updateTask: () => {},
   setSelectedId: () => {},
   selectedId: null,
+  filteredTask: [],
+  searchTask: () => {},
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -54,6 +58,19 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
+  const [filteredTask, setFilteredTask] = useState<TaskProps[]>(task);
+
+  //? SetFiltered Task
+  const searchTask = useCallback(
+    (text: string) => {
+      setFilteredTask(task.filter((item) => item.text.includes(text)));
+    },
+    [task]
+  );
+  //* const searchTask = (text: string) => {
+  //*  setFilteredTask(current=>current.filter((item) => item.text.includes(text)));
+  //* };
+
   //? Get Task from Local Storage
   const setLocalTask = () => {
     localStorage.setItem("task", JSON.stringify(task));
@@ -66,9 +83,10 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  //?Task Local Storage
+  //? Task Local Storage
   useEffect(() => {
     setLocalTask();
+    setFilteredTask(task);
   }, [task]);
 
   //? Delete Task
@@ -107,6 +125,8 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         edit,
         setSelectedId,
         selectedId,
+        filteredTask,
+        searchTask,
       }}
     >
       {children}
