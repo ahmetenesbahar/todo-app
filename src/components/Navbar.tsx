@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+
 import {
   FaBars,
   FaHome,
@@ -8,11 +9,22 @@ import {
   FaSun,
   FaMoon,
 } from "react-icons/fa";
-import { useContext, useEffect, useState } from "react";
+
 import ThemeContext from "./context/ThemeContext";
+import TodoContext from "./context/TodoContext";
 
 const Navbar = () => {
   const { toggleTheme, theme } = useContext(ThemeContext);
+  const { searchTask } = useContext(TodoContext);
+  const [search, setSearch] = useState("");
+
+  const searchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    searchTask(search);
+  }, [search]);
 
   return (
     <div className={`navbar ${theme}`}>
@@ -20,7 +32,12 @@ const Navbar = () => {
         {/* <FaBars className="menu icon" />
         <FaHome className="home icon" /> */}
         <form className="search-form">
-          <input type="text" className="search" />
+          <input
+            type="text"
+            className="search"
+            value={search}
+            onChange={searchOnChange}
+          />
           <FaSearch className="search-icon icon" />
         </form>
       </div>

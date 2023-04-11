@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 type TaskProps = {
   id: number;
@@ -22,7 +22,8 @@ interface IType {
   updateTask: (newTask: { text: string; id: number }) => void;
   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
   selectedId: number | null;
-  setLocalTask: () => void;
+  filteredTask: TaskProps[];
+  searchTask: (text: string) => void;
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -39,7 +40,8 @@ const TodoContext = createContext<IType>({
   updateTask: () => {},
   setSelectedId: () => {},
   selectedId: null,
-  setLocalTask: () => {},
+  filteredTask: [],
+  searchTask: () => {},
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -56,35 +58,51 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  // Get Task from Local Storage
+  const [filteredTask, setFilteredTask] = useState<TaskProps[]>(task);
+
+  //? SetFiltered Task
+  const searchTask = useCallback(
+    (text: string) => {
+      setFilteredTask(task.filter((item) => item.text.includes(text)));
+    },
+    [task]
+  );
+  //* const searchTask = (text: string) => {
+  //*  setFilteredTask(current=>current.filter((item) => item.text.includes(text)));
+  //* };
+
+  //? Get Task from Local Storage
   const setLocalTask = () => {
     localStorage.setItem("task", JSON.stringify(task));
   };
 
-  // Add Task
+  //? Add Task
   const addTask = (newTask: { text: string; id: number }) => {
     if (newTask.text !== "") {
       setTask([newTask, ...task]);
     }
   };
 
+  //? Task Local Storage
   useEffect(() => {
     setLocalTask();
+    setFilteredTask(task);
   }, [task]);
-  //? UseEffect olarak yazınca sorun olmadı diğer türlü add in içine yazdığımda eklediğim ilk taskı almıyor
-  //Delete Task
+
+  //? Delete Task
   const deleteTask = (id: number) => {
     setTask(task.filter((item) => item.id !== id));
   };
-  //Edit Task
 
+  //? Edit Task
   const editTask = (item: { id: number; text: string }) => {
     setEdit({
       item,
       edit: true,
     });
   };
-  // Update Task
+
+  //? Update Task
   const updateTask = (newTask: { text: string; id: number }) => {
     setTask(
       task.map((item) =>
@@ -107,7 +125,8 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         edit,
         setSelectedId,
         selectedId,
-        setLocalTask,
+        filteredTask,
+        searchTask,
       }}
     >
       {children}
