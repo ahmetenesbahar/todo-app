@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-import { useTodo } from "@/context/TodoContext";
+import { useTodo } from "@context/TodoContext";
 
 type ChildProps = {
   item: {

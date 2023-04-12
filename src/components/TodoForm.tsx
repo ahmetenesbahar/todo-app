@@ -2,7 +2,7 @@ import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 
 import { FaPlus } from "react-icons/fa";
 
-import { useTodo } from "@/context/TodoContext";
+import { useTodo } from "@context/TodoContext";
 
 const TodoForm: FC = () => {
   const { addTask, edit, updateTask } = useTodo();

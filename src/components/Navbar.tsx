@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { FaMoon, FaSearch, FaSun } from "react-icons/fa";
 
-import { useTheme } from "@/context/ThemeContext";
-import { useTodo } from "@/context/TodoContext";
+import { useTheme } from "@context/ThemeContext";
+import { useTodo } from "@context/TodoContext";
 
 const Navbar = () => {
   const { toggleTheme, theme } = useTheme();

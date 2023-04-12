@@ -2,8 +2,8 @@ import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 
 import { FaUser } from "react-icons/fa";
 
-import { useTheme } from "@/context/ThemeContext";
-import { useUserContext } from "@/context/UserContext";
+import { useTheme } from "@context/ThemeContext";
+import { useUserContext } from "@context/UserContext";
 
 const Login: FC = () => {
   const { isLoggedIn, localUser, localUserCheck, hide, setHide } =
