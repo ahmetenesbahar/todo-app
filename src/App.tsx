@@ -2,7 +2,6 @@ import { FC } from "react";
 import "./App.scss";
 
 import { Helmet } from "react-helmet";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import { Login, Navbar, TodoForm, TodoList } from "@components";
 
@@ -11,8 +10,6 @@ import { useTheme } from "@context/ThemeContext";
 
 const App: FC = () => {
   const { theme } = useTheme();
-
-  const [animationParent] = useAutoAnimate();
 
   return (
     <TodoProvider>

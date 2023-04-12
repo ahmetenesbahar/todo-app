@@ -31,3 +31,11 @@
     color: $white2;
   }
 }
+
+.no-task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  margin: 5rem;
+}

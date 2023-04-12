@@ -8,7 +8,7 @@
 
   .icon {
     color: $dark;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     cursor: pointer;
   }
   .left {
@@ -34,6 +34,7 @@
         position: absolute;
         left: 5px;
         color: $dark-blue;
+        cursor: auto;
       }
     }
   }
@@ -42,14 +43,6 @@
     justify-content: space-between;
     align-items: center;
     gap: 30px;
-    .user-icon {
-      font-size: 1.5rem;
-      cursor: pointer;
-      background-color: $white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-    }
   }
 }
 

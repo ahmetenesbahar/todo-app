@@ -14,7 +14,7 @@ const TodoList: FC = () => {
   const [animationParent] = useAutoAnimate();
 
   if (!filteredTask || filteredTask.length === 0) {
-    return <p>No Task :D</p>;
+    return <p className="no-task">No Task Added</p>;
   }
 
   return (
