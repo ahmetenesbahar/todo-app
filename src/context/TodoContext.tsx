@@ -9,19 +9,22 @@ import {
 type TaskProps = {
   id: number;
   text: string;
+  checked: boolean;
 };
 interface IType {
   task: {
     id: number;
     text: string;
+    checked: boolean;
   }[];
-  addTask: (newTask: { text: string; id: number }) => void;
+  addTask: (newTask: { text: string; id: number; checked: boolean }) => void;
   deleteTask: (id: number) => void;
-  editTask: (task: { id: number; text: string }) => void;
+  editTask: (item: { id: number; text: string; checked: boolean }) => void;
   edit: {
     item: {
       text: string;
       id: number;
+      checked: boolean;
     };
     edit: boolean;
   };
@@ -30,6 +33,7 @@ interface IType {
   selectedId: number | null;
   filteredTask: TaskProps[];
   searchTask: (text: string) => void;
+  handleChecked: (id: number) => void;
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -40,6 +44,7 @@ const TodoContext = createContext<IType>({
     item: {
       text: "",
       id: 0,
+      checked: false,
     },
     edit: false,
   },
@@ -48,6 +53,7 @@ const TodoContext = createContext<IType>({
   selectedId: null,
   filteredTask: [],
   searchTask: () => {},
+  handleChecked: () => {},
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -58,13 +64,24 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     item: {
       text: "",
       id: 0,
+      checked: false,
     },
     edit: false,
   });
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
-
   const [filteredTask, setFilteredTask] = useState<TaskProps[]>(task);
+
+  //TODO Check Task
+  const handleChecked = (id: number) => {
+    task.map((item) => {
+      setTask(
+        task.map((item) =>
+          item.id === id ? { ...item, checked: !item.checked } : item
+        )
+      );
+    });
+  };
 
   //? SetFiltered Task
   const searchTask = useCallback(
@@ -83,7 +100,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   //? Add Task
-  const addTask = (newTask: { text: string; id: number }) => {
+  const addTask = (newTask: { text: string; id: number; checked: boolean }) => {
     if (newTask.text !== "") {
       setTask([newTask, ...task]);
     }
@@ -101,7 +118,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   //? Edit Task
-  const editTask = (item: { id: number; text: string }) => {
+  const editTask = (item: { id: number; text: string; checked: boolean }) => {
     setEdit({
       item,
       edit: true,
@@ -133,6 +150,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         selectedId,
         filteredTask,
         searchTask,
+        handleChecked,
       }}
     >
       {children}
