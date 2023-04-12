@@ -30,6 +30,7 @@ const Navbar = () => {
             className="search"
             value={search}
             onChange={searchOnChange}
+            placeholder="Search"
           />
           <FaSearch className="search-icon icon" />
         </form>
@@ -42,8 +43,6 @@ const Navbar = () => {
         ) : (
           <FaSun className="sun-icon icon " onClick={toggleTheme} />
         )}
-
-        <div className="user-icon"></div>
       </div>
     </div>
   );
