@@ -1,4 +1,10 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type TaskProps = {
   id: number;
@@ -133,4 +139,6 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     </TodoContext.Provider>
   );
 };
-export default TodoContext;
+export default TodoProvider;
+
+export const useTodo = () => useContext(TodoContext);

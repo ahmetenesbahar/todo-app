@@ -1,16 +1,12 @@
-import React, { FC, useEffect } from "react";
+import { FC } from "react";
 import "./App.scss";
 
 import { Helmet } from "react-helmet";
 
-import { TodoProvider } from "./components/context/TodoContext";
-import { UserProvider } from "./components/context/UserContext";
-import { useTheme } from "./components/context/ThemeContext";
+import { Login, Navbar, TodoForm, TodoList } from "@/components";
 
-import TodoList from "./components/TodoList";
-import TodoForm from "./components/TodoForm";
-import Login from "./components/Login";
-import Navbar from "./components/Navbar";
+import { TodoProvider, UserProvider } from "@/context";
+import { useTheme } from "@/context/ThemeContext";
 
 const App: FC = () => {
   const { theme } = useTheme();

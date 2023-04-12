@@ -1,21 +1,31 @@
-import React from "react";
-import { useState, FC, useContext } from "react";
-import TodoContext from "./context/TodoContext";
-import ThemeContext from "./context/ThemeContext";
-import TodoItem from "./TodoItem";
+import { FC } from "react";
+
+import { TodoItem } from "@/components";
+
+import { useTheme } from "@/context/ThemeContext";
+import { useTodo } from "@/context/TodoContext";
 
 const TodoList: FC = () => {
-  const { filteredTask } = useContext(TodoContext);
-  const { theme } = useContext(ThemeContext);
+  const { filteredTask } = useTodo();
+  const { theme } = useTheme();
+
   if (!filteredTask || filteredTask.length === 0) {
     return <p>No Task :D</p>;
   }
 
+  const RenderTodoList = () => {
+    return (
+      <>
+        {filteredTask.map((item) => (
+          <TodoItem key={item.id} item={item} />
+        ))}
+      </>
+    );
+  };
+
   return (
     <div className={`task-list ${theme}`}>
-      {filteredTask.map((item) => (
-        <TodoItem key={item.id} item={item} />
-      ))}
+      <RenderTodoList />
     </div>
   );
 };
