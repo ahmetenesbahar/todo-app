@@ -21,7 +21,7 @@ const TodoForm: FC = () => {
       edit.edit = false;
     } else {
       const generateId = Math.floor(Math.random() * 10000000000000);
-      addTask({ text, id: generateId, checked: false });
+      addTask({ text, id: generateId });
     }
     setText("");
   };
