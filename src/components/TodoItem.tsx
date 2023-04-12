@@ -12,21 +12,18 @@ type ChildProps = {
 };
 
 const TodoItem: FC<ChildProps> = ({ item }) => {
-  const { deleteTask, editTask, setSelectedId, selectedId } = useTodo();
-
-  const [checked, setChecked] = useState(false);
+  const {
+    deleteTask,
+    editTask,
+    setSelectedId,
+    selectedId,
+    handleChecked,
+    checked,
+  } = useTodo();
 
   const handleEditClick = () => {
     editTask(item);
     setSelectedId(item.id);
-  };
-
-  const handleChecked = () => {
-    if (checked) {
-      setChecked(false);
-    } else {
-      setChecked(true);
-    }
   };
 
   const taskCardClass =
