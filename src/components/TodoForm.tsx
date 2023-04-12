@@ -1,22 +1,18 @@
-import React from "react";
-import {
-  FC,
-  useContext,
-  ChangeEvent,
-  useEffect,
-  useState,
-  FormEvent,
-} from "react";
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
+
 import { FaPlus } from "react-icons/fa";
-import TodoContext from "./context/TodoContext";
+
+import { useTodo } from "@context/TodoContext";
 
 const TodoForm: FC = () => {
-  const { addTask, edit, updateTask } = useContext(TodoContext);
+  const { addTask, edit, updateTask } = useTodo();
+
+  const [text, setText] = useState<string>("");
+  const [id, setId] = useState<number>();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
-  const [text, setText] = useState<string>("");
-  const [id, setId] = useState<number>();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,8 +24,6 @@ const TodoForm: FC = () => {
       addTask({ text, id: generateId });
     }
     setText("");
-
-    // setId(generateId);
   };
 
   useEffect(() => {

@@ -1,21 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import {
-  FaBars,
-  FaHome,
-  FaPlus,
-  FaBell,
-  FaSearch,
-  FaSun,
-  FaMoon,
-} from "react-icons/fa";
+import { FaMoon, FaSearch, FaSun } from "react-icons/fa";
 
-import ThemeContext from "./context/ThemeContext";
-import TodoContext from "./context/TodoContext";
+import { useTheme } from "@context/ThemeContext";
+import { useTodo } from "@context/TodoContext";
 
 const Navbar = () => {
-  const { toggleTheme, theme } = useContext(ThemeContext);
-  const { searchTask } = useContext(TodoContext);
+  const { toggleTheme, theme } = useTheme();
+  const { searchTask } = useTodo();
+
   const [search, setSearch] = useState("");
 
   const searchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

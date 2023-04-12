@@ -1,18 +1,24 @@
-import React from "react";
-import { useState, FC, useContext } from "react";
-import TodoContext from "./context/TodoContext";
-import ThemeContext from "./context/ThemeContext";
-import TodoItem from "./TodoItem";
+import { FC } from "react";
+
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+
+import { TodoItem } from "@components/index";
+
+import { useTheme } from "@context/ThemeContext";
+import { useTodo } from "@context/TodoContext";
 
 const TodoList: FC = () => {
-  const { filteredTask } = useContext(TodoContext);
-  const { theme } = useContext(ThemeContext);
+  const { filteredTask } = useTodo();
+  const { theme } = useTheme();
+
+  const [animationParent] = useAutoAnimate();
+
   if (!filteredTask || filteredTask.length === 0) {
     return <p>No Task :D</p>;
   }
 
   return (
-    <div className={`task-list ${theme}`}>
+    <div className={`task-list ${theme}`} ref={animationParent}>
       {filteredTask.map((item) => (
         <TodoItem key={item.id} item={item} />
       ))}
