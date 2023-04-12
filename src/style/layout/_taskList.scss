@@ -67,3 +67,8 @@
   background-color: $primary-color !important;
   color: $white2;
 }
+
+.task-text.checked {
+  text-decoration: line-through;
+  color: $white2;
+}
