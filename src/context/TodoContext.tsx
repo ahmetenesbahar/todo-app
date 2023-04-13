@@ -72,16 +72,17 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [filteredTask, setFilteredTask] = useState<TaskProps[]>(task);
 
-  //TODO Check Task
+  //TODO Check Task useCallback ile yazılacak /Usta şuna da bi bak farklı şekilde yapılması gerekiyorsa öyle yap uykum geldi
   const handleChecked = (id: number) => {
-    task.map((item) => {
-      setTask(
-        task.map((item) =>
-          item.id === id ? { ...item, checked: !item.checked } : item
-        )
-      );
-    });
+    setTask((current) =>
+      current.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );
+    setCheck();
   };
+  //TODO Usta şuna da bi bak farklı şekilde yapılması gerekiyorsa öyle yap uykum geldi
+  const setCheck = () => {};
 
   //? SetFiltered Task
   const searchTask = useCallback(
