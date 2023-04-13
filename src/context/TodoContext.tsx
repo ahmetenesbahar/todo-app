@@ -33,7 +33,6 @@ interface IType {
   selectedId: number | null;
   filteredTask: TaskProps[];
   searchTask: (text: string) => void;
-  handleChecked: (id: number) => void;
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -53,7 +52,6 @@ const TodoContext = createContext<IType>({
   selectedId: null,
   filteredTask: [],
   searchTask: () => {},
-  handleChecked: () => {},
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -73,16 +71,8 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   const [filteredTask, setFilteredTask] = useState<TaskProps[]>(task);
 
   //TODO Check Task useCallback ile yazılacak /Usta şuna da bi bak farklı şekilde yapılması gerekiyorsa öyle yap uykum geldi
-  const handleChecked = (id: number) => {
-    setTask((current) =>
-      current.map((item) =>
-        item.id === id ? { ...item, checked: !item.checked } : item
-      )
-    );
-    setCheck();
-  };
+
   //TODO Usta şuna da bi bak farklı şekilde yapılması gerekiyorsa öyle yap uykum geldi
-  const setCheck = () => {};
 
   //? SetFiltered Task
   const searchTask = useCallback(
@@ -151,7 +141,6 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         selectedId,
         filteredTask,
         searchTask,
-        handleChecked,
       }}
     >
       {children}
