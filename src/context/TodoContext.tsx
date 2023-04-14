@@ -9,19 +9,22 @@ import {
 type TaskProps = {
   id: number;
   text: string;
+  checked: boolean;
 };
 interface IType {
   task: {
     id: number;
     text: string;
+    checked: boolean;
   }[];
-  addTask: (newTask: { text: string; id: number }) => void;
+  addTask: (newTask: { text: string; id: number; checked: boolean }) => void;
   deleteTask: (id: number) => void;
-  editTask: (task: { id: number; text: string }) => void;
+  editTask: (item: { id: number; text: string; checked: boolean }) => void;
   edit: {
     item: {
       text: string;
       id: number;
+      checked: boolean;
     };
     edit: boolean;
   };
@@ -40,6 +43,7 @@ const TodoContext = createContext<IType>({
     item: {
       text: "",
       id: 0,
+      checked: false,
     },
     edit: false,
   },
@@ -58,12 +62,12 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     item: {
       text: "",
       id: 0,
+      checked: false,
     },
     edit: false,
   });
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
-
   const [filteredTask, setFilteredTask] = useState<TaskProps[]>(task);
 
   //? SetFiltered Task
@@ -83,17 +87,11 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   //? Add Task
-  const addTask = (newTask: { text: string; id: number }) => {
+  const addTask = (newTask: { text: string; id: number; checked: boolean }) => {
     if (newTask.text !== "") {
       setTask([newTask, ...task]);
     }
   };
-
-  //? Task Local Storage
-  useEffect(() => {
-    setLocalTask();
-    setFilteredTask(task);
-  }, [task]);
 
   //? Delete Task
   const deleteTask = (id: number) => {
@@ -101,7 +99,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   //? Edit Task
-  const editTask = (item: { id: number; text: string }) => {
+  const editTask = (item: { id: number; text: string; checked: boolean }) => {
     setEdit({
       item,
       edit: true,
@@ -119,6 +117,12 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
       .querySelectorAll(".task-card")
       .forEach((item) => item.classList.remove("selected"));
   };
+
+  //? Task Local Storage
+  useEffect(() => {
+    setLocalTask();
+    setFilteredTask(task);
+  }, [task]);
 
   return (
     <TodoContext.Provider

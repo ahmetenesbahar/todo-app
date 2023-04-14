@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef, useState, useEffect } from "react";
 
 import { FaEdit, FaTrash } from "react-icons/fa";
 
@@ -8,15 +8,22 @@ type ChildProps = {
   item: {
     id: number;
     text: string;
+    checked: boolean;
   };
 };
 
 const TodoItem: FC<ChildProps> = ({ item }) => {
   const { deleteTask, editTask, setSelectedId, selectedId } = useTodo();
 
+  const checktext = useRef<HTMLParagraphElement>(null);
+
   const handleEditClick = () => {
     editTask(item);
     setSelectedId(item.id);
+  };
+
+  const handleCheck = (id: number) => {
+    checktext.current?.classList.toggle("check");
   };
 
   const taskCardClass =
@@ -24,8 +31,16 @@ const TodoItem: FC<ChildProps> = ({ item }) => {
 
   return (
     <div className={taskCardClass}>
-      <input type="checkbox" className="checkbox" />
-      <p className="task-text">{item.text}</p>
+      <input
+        type="checkbox"
+        className="checkbox"
+        onClick={() => {
+          handleCheck(item.id);
+        }}
+      />
+      <p className="task-text" ref={checktext}>
+        {item.text}
+      </p>
       <div className="card-btn">
         <FaTrash className="delete" onClick={() => deleteTask(item.id)} />
         <FaEdit className="edit" onClick={handleEditClick} />

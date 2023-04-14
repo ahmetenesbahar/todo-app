@@ -61,9 +61,18 @@
   .task-card.selected {
     background-color: #19376d !important;
   }
+  .task-text.check {
+    text-decoration: line-through;
+    color: $white2 !important;
+  }
 }
 
 .task-card.selected {
   background-color: $primary-color !important;
   color: $white2;
+}
+
+.task-text.check {
+  text-decoration: line-through;
+  color: $dark;
 }
