@@ -22,7 +22,7 @@ const TodoItem: FC<ChildProps> = ({ item }) => {
     setSelectedId(item.id);
   };
 
-  const handleChecked = (id: number) => {
+  const handleCheck = (id: number) => {
     checktext.current?.classList.toggle("check");
   };
 
@@ -35,7 +35,7 @@ const TodoItem: FC<ChildProps> = ({ item }) => {
         type="checkbox"
         className="checkbox"
         onClick={() => {
-          handleChecked(item.id);
+          handleCheck(item.id);
         }}
       />
       <p className="task-text" ref={checktext}>

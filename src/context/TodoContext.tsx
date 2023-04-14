@@ -70,10 +70,6 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [filteredTask, setFilteredTask] = useState<TaskProps[]>(task);
 
-  //TODO Check Task useCallback ile yazılacak /Usta şuna da bi bak farklı şekilde yapılması gerekiyorsa öyle yap uykum geldi
-
-  //TODO Usta şuna da bi bak farklı şekilde yapılması gerekiyorsa öyle yap uykum geldi
-
   //? SetFiltered Task
   const searchTask = useCallback(
     (text: string) => {
@@ -96,12 +92,6 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
       setTask([newTask, ...task]);
     }
   };
-
-  //? Task Local Storage
-  useEffect(() => {
-    setLocalTask();
-    setFilteredTask(task);
-  }, [task]);
 
   //? Delete Task
   const deleteTask = (id: number) => {
@@ -127,6 +117,12 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
       .querySelectorAll(".task-card")
       .forEach((item) => item.classList.remove("selected"));
   };
+
+  //? Task Local Storage
+  useEffect(() => {
+    setLocalTask();
+    setFilteredTask(task);
+  }, [task]);
 
   return (
     <TodoContext.Provider
