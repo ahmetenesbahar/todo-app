@@ -33,6 +33,7 @@ interface IType {
   selectedId: number | null;
   filteredTask: TaskProps[];
   searchTask: (text: string) => void;
+  localCheck: (id: number) => void;
 }
 const TodoContext = createContext<IType>({
   task: [],
@@ -52,6 +53,7 @@ const TodoContext = createContext<IType>({
   selectedId: null,
   filteredTask: [],
   searchTask: () => {},
+  localCheck: () => {},
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -80,6 +82,15 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
   //* const searchTask = (text: string) => {
   //*  setFilteredTask(current=>current.filter((item) => item.text.includes(text)));
   //* };
+
+  //? Sets checked value in local
+  const localCheck = (id: number) => {
+    setTask((current) =>
+      current.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );
+  };
 
   //? Get Task from Local Storage
   const setLocalTask = () => {
@@ -137,6 +148,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         selectedId,
         filteredTask,
         searchTask,
+        localCheck,
       }}
     >
       {children}
