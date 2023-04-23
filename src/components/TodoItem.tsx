@@ -28,12 +28,21 @@ const TodoItem: FC<ChildProps> = ({ item }) => {
     checktext.current?.classList.toggle("check", checkbox.current?.checked);
   };
 
+  const localChecked = () => {
+    task.map((item) => {
+      if (item.checked) {
+        checkbox.current?.setAttribute("checked", "checked");
+        checktext.current?.classList.add("check");
+      }
+    });
+  };
+
   const taskCardClass =
     selectedId == item.id ? "task-card selected" : "task-card";
 
   useEffect(() => {
-    handleCheck();
-  }, [task]);
+    localChecked();
+  }, []);
 
   return (
     <div className={taskCardClass}>
