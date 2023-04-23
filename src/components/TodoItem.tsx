@@ -1,4 +1,4 @@
-import { FC, useRef, useState, useEffect } from "react";
+import { FC, useRef, useState, useEffect, useCallback } from "react";
 
 import { FaEdit, FaTrash } from "react-icons/fa";
 
@@ -13,29 +13,44 @@ type ChildProps = {
 };
 
 const TodoItem: FC<ChildProps> = ({ item }) => {
-  const { deleteTask, editTask, setSelectedId, selectedId } = useTodo();
+  const { deleteTask, editTask, setSelectedId, selectedId, localCheck, task } =
+    useTodo();
 
   const checktext = useRef<HTMLParagraphElement>(null);
+  const checkbox = useRef<HTMLInputElement>(null);
 
   const handleEditClick = () => {
     editTask(item);
     setSelectedId(item.id);
   };
 
-  const handleCheck = (id: number) => {
-    checktext.current?.classList.toggle("check");
+  const handleCheck = () => {
+    checktext.current?.classList.toggle("check", checkbox.current?.checked);
+  };
+
+  const localChecked = () => {
+    if (item.checked) {
+      checkbox.current?.setAttribute("checked", "checked");
+      checktext.current?.classList.add("check");
+    }
   };
 
   const taskCardClass =
     selectedId == item.id ? "task-card selected" : "task-card";
+
+  useEffect(() => {
+    localChecked();
+  }, []);
 
   return (
     <div className={taskCardClass}>
       <input
         type="checkbox"
         className="checkbox"
+        ref={checkbox}
         onClick={() => {
-          handleCheck(item.id);
+          localCheck(item.id);
+          handleCheck();
         }}
       />
       <p className="task-text" ref={checktext}>
