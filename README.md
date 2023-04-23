@@ -21,10 +21,10 @@ npm start
 ## Ekran Görüntüleri
 
 <div>
-<img src="">
-<img src="">
-<img src="">
-<img src="">
+<img src="https://github.com/ahmetenesbahar/todo-app/blob/v.1.0.0/docs/add-readme/public/images/screenshots/todo-app-login-dark.png">
+<img src="https://github.com/ahmetenesbahar/todo-app/blob/v.1.0.0/docs/add-readme/public/images/screenshots/todo-app-dark.png">
+<img src="https://github.com/ahmetenesbahar/todo-app/blob/v.1.0.0/docs/add-readme/public/images/screenshots/todo-app-login-light.png">
+<img src="https://github.com/ahmetenesbahar/todo-app/blob/v.1.0.0/docs/add-readme/public/images/screenshots/todo-app-light.png">
 
 </div>
 
