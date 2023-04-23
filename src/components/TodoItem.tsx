@@ -29,12 +29,10 @@ const TodoItem: FC<ChildProps> = ({ item }) => {
   };
 
   const localChecked = () => {
-    task.map((item) => {
-      if (item.checked) {
-        checkbox.current?.setAttribute("checked", "checked");
-        checktext.current?.classList.add("check");
-      }
-    });
+    if (item.checked) {
+      checkbox.current?.setAttribute("checked", "checked");
+      checktext.current?.classList.add("check");
+    }
   };
 
   const taskCardClass =
