@@ -8,7 +8,7 @@ const ThemeContext = createContext({
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState<"light" | "dark">(
-    JSON.parse(localStorage.getItem("theme")!) ?? "light"
+    JSON.parse(localStorage.getItem("theme")!) ?? "dark"
   ); //!
 
   const toggleTheme = () => {

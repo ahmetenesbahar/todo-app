@@ -19,8 +19,12 @@ const Login: FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isLoggedIn) {
-      localUser({ username });
-      setHide("hide");
+      if (username !== "" && username.trim().length >= 3) {
+        localUser({ username });
+        setHide("hide");
+      } else {
+        alert("Please enter a username");
+      }
     }
   };
 
