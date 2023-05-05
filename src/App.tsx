@@ -23,17 +23,16 @@ const App: FC = () => {
         <Routes>
           <Route
             path="/"
-            element={isLoggedIn ? <Navigate to="todo" /> : <Login />}
-          />
-          {/* <Route path="login" element={<Login />} /> */}
-          <Route
-            path="todo"
             element={
-              <>
-                <Navbar />
-                <TodoForm />
-                <TodoList />
-              </>
+              isLoggedIn ? (
+                <>
+                  <Navbar />
+                  <TodoForm />
+                  <TodoList />
+                </>
+              ) : (
+                <Login />
+              )
             }
           />
         </Routes>
