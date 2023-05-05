@@ -6,8 +6,7 @@ import { useTheme } from "@context/ThemeContext";
 import { useUserContext } from "@context/UserContext";
 
 const Login: FC = () => {
-  const { isLoggedIn, localUser, localUserCheck, hide, setHide } =
-    useUserContext();
+  const { isLoggedIn, localUser, localUserCheck } = useUserContext();
   const { theme } = useTheme();
 
   const [username, setUsername] = useState<string>("");
@@ -21,7 +20,6 @@ const Login: FC = () => {
     if (!isLoggedIn) {
       if (username !== "" && username.trim().length >= 3) {
         localUser({ username });
-        setHide("hide");
       } else {
         alert("Please enter a username");
       }
@@ -34,7 +32,7 @@ const Login: FC = () => {
 
   return (
     <>
-      <div className={`login-screen ${theme} ${hide}`}>
+      <div className={`login-screen ${theme}`}>
         <div className="login-card ">
           <h4 className="welcome-text">Welcome to Satuhaz's Todo App</h4>
           <form className="login-form" onSubmit={handleSubmit}>
