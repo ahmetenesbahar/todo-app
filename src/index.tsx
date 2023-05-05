@@ -9,12 +9,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Router>
-      <ThemeProvider>
-        <UserProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <Router>
           <App />
-        </UserProvider>
-      </ThemeProvider>
-    </Router>
+        </Router>
+      </UserProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

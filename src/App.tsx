@@ -14,10 +14,6 @@ const App: FC = () => {
   const { theme } = useTheme();
   const { isLoggedIn } = useUserContext();
 
-  useEffect(() => {
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
-
   return (
     <TodoProvider>
       <Helmet>
@@ -27,11 +23,9 @@ const App: FC = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              isLoggedIn ? <Navigate to="todo" /> : <Navigate to="login" />
-            }
+            element={isLoggedIn ? <Navigate to="todo" /> : <Login />}
           />
-          <Route path="login" element={<Login />} />
+          {/* <Route path="login" element={<Login />} /> */}
           <Route
             path="todo"
             element={
