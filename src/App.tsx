@@ -1,29 +1,49 @@
-import { FC } from "react";
+import { FC, useEffect, useCallback } from "react";
 import "./App.scss";
 
 import { Helmet } from "react-helmet";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import { Login, Navbar, TodoForm, TodoList } from "@components";
 
 import { TodoProvider, UserProvider } from "@context";
 import { useTheme } from "@context/ThemeContext";
+import { useUserContext } from "@context/UserContext";
 
 const App: FC = () => {
   const { theme } = useTheme();
+  const { isLoggedIn } = useUserContext();
+
+  useEffect(() => {
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
 
   return (
     <TodoProvider>
-      <UserProvider>
-        <Helmet>
-          <title>Todo App</title>
-        </Helmet>
-        <main className={`app ${theme}`}>
-          <Login />
-          <Navbar />
-          <TodoForm />
-          <TodoList />
-        </main>
-      </UserProvider>
+      <Helmet>
+        <title>Todo App</title>
+      </Helmet>
+      <main className={`app ${theme}`}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              isLoggedIn ? <Navigate to="todo" /> : <Navigate to="login" />
+            }
+          />
+          <Route path="login" element={<Login />} />
+          <Route
+            path="todo"
+            element={
+              <>
+                <Navbar />
+                <TodoForm />
+                <TodoList />
+              </>
+            }
+          />
+        </Routes>
+      </main>
     </TodoProvider>
   );
 };

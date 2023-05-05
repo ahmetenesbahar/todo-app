@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+  useCallback,
+} from "react";
 
 interface IType {
   isLoggedIn: boolean;
@@ -15,8 +21,6 @@ interface IType {
   >;
   localUserCheck: () => void;
   localUser: (user: { username: string }) => void;
-  hide: "" | "hide";
-  setHide: React.Dispatch<React.SetStateAction<"" | "hide">>;
 }
 const UserContext = createContext<IType>({
   isLoggedIn: false,
@@ -28,8 +32,6 @@ const UserContext = createContext<IType>({
   setUser: () => {},
   localUser: () => {},
   localUserCheck: () => {},
-  hide: "",
-  setHide: () => {},
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -38,25 +40,26 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     username: "",
     password: "",
   });
-  const [hide, setHide] = useState<"hide" | "">("");
 
-  const localUser = (user: { username: string }) => {
-    localStorage.setItem("user", JSON.stringify(user));
-  };
+  const localUser = useCallback(
+    (user: { username: string }) => {
+      setIsLoggedIn(true);
+      localStorage.setItem("user", JSON.stringify(user));
+    },
+    [isLoggedIn]
+  );
 
-  const localUserCheck = () => {
+  const localUserCheck = useCallback(() => {
     const getlocalUser = localStorage.getItem("user");
     if (getlocalUser) {
+      setIsLoggedIn(true);
       const user = JSON.parse(getlocalUser);
       setUser(user);
-      setIsLoggedIn(true);
-      setHide("hide");
     }
     if (!getlocalUser) {
       setIsLoggedIn(false);
-      setHide("");
     }
-  };
+  }, [isLoggedIn]);
 
   const value = {
     isLoggedIn,
@@ -65,8 +68,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     setUser,
     localUser,
     localUserCheck,
-    hide,
-    setHide,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
