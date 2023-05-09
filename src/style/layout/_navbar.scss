@@ -61,3 +61,27 @@
     }
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .navbar {
+    .left {
+      .search-form {
+        .search {
+          min-width: 200px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 610px) {
+  .icon {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .icon {
+    font-size: 1rem;
+  }
+}

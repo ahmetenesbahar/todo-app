@@ -39,3 +39,35 @@
   font-size: 1.3rem;
   margin: 5rem;
 }
+
+@media only screen and (max-width: 900px) {
+  .task-form {
+    .form {
+      min-width: 500px;
+    }
+  }
+}
+
+@media only screen and (max-width: 610px) {
+  .task-form {
+    .form {
+      min-width: 300px;
+      max-width: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .task-form {
+    .form {
+      min-width: 250px;
+      max-width: 250px;
+      font-size: 1rem;
+    }
+    button {
+      .add {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

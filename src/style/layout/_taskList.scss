@@ -76,3 +76,61 @@
   text-decoration: line-through;
   color: $dark;
 }
+
+@media only screen and (max-width: 900px) {
+  .task-list {
+    .task-card {
+      min-width: 600px;
+      max-width: 600px;
+      .task-text {
+        min-width: 300px;
+        max-width: 300px;
+      }
+    }
+  }
+  .no-task {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 610px) {
+  .task-list {
+    .task-card {
+      min-width: 400px;
+      max-width: 400px;
+      .task-text {
+        min-width: 200px;
+        max-width: 200px;
+      }
+    }
+  }
+  .no-task {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .task-list {
+    .task-card {
+      min-width: 350px;
+      max-width: 350px;
+      .task-text {
+        max-width: 100px;
+        font-size: 0.9rem;
+      }
+      .card-btn {
+        .delete {
+          margin: 3px;
+          font-size: 13px;
+        }
+        .edit {
+          margin: 3px;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  .no-task {
+    font-size: 0.8rem;
+  }
+}
