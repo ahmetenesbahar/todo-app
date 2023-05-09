@@ -88,6 +88,9 @@
       }
     }
   }
+  .no-task {
+    font-size: 1rem;
+  }
 }
 
 @media only screen and (max-width: 610px) {
@@ -100,6 +103,9 @@
         max-width: 200px;
       }
     }
+  }
+  .no-task {
+    font-size: 0.9rem;
   }
 }
 
@@ -123,5 +129,8 @@
         }
       }
     }
+  }
+  .no-task {
+    font-size: 0.8rem;
   }
 }
