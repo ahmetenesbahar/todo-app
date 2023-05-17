@@ -102,6 +102,12 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     if (newTask.text !== "") {
       setTask([newTask, ...task]);
     }
+    if (
+      newTask.text.toLowerCase().includes("order 66") ||
+      newTask.text.toLowerCase().includes("execute order 66")
+    ) {
+      window.open("https://www.youtube.com/watch?v=G2QhAynp1FY");
+    }
   };
 
   //? Delete Task
