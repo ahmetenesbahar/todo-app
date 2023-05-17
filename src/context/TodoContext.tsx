@@ -106,7 +106,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
       newTask.text.toLowerCase().includes("order 66") ||
       newTask.text.toLowerCase().includes("execute order 66")
     ) {
-      alert("Execute Order 66");
+      window.open("https://www.youtube.com/watch?v=G2QhAynp1FY");
     }
   };
 
